@@ -3,15 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Chilimba Max - Ultimate Edition</title>
+  <title>Chilimba Max - Standard Edition</title>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-gradient-to-br from-[#0B0813] via-[#160F29] to-[#0B0813] min-h-screen text-slate-100 p-4 md:p-8 flex items-center justify-center font-sans">
 
+  <!-- DYNAMIC ADMIN ALERT SYSTEM -->
   <div id="alertBanner" class="fixed top-5 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-emerald-400 to-teal-500 text-gray-950 font-black text-sm px-6 py-3 rounded-xl shadow-[0_10px_30px_rgba(16,185,129,0.3)] z-50 transition-all duration-300 opacity-0 pointer-events-none">
     <span id="alertMessage">Notification Alert</span>
   </div>
 
+  <!-- ================= VIEW 1: LOGIN VIEW ================= -->
   <div id="loginView" class="w-full max-w-md bg-[#1F1638]/60 backdrop-blur-xl border border-purple-500/20 rounded-3xl p-6 md:p-8 shadow-[0_22px_70px_rgba(139,92,246,0.15)]">
     <div class="text-center mb-6">
       <span class="bg-purple-500/10 text-purple-400 border border-purple-500/20 text-[10px] uppercase tracking-widest font-black px-2.5 py-0.5 rounded-full">Secure Portal</span>
@@ -22,11 +24,11 @@
     <form id="loginForm" class="space-y-4">
       <div>
         <label class="block text-xs font-bold text-purple-300/80 uppercase tracking-wider mb-1.5">Group Name</label>
-        <input type="text" id="loginGroup" required placeholder="e.g., Chongo Streetwear Crew" class="w-full bg-[#17102B]/80 border border-purple-500/20 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-purple-500 text-white">
+        <input type="text" id="loginGroup" required placeholder="e.g., Alpha Savings Crew" class="w-full bg-[#17102B]/80 border border-purple-500/20 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-purple-500 text-white">
       </div>
       <div>
         <label class="block text-xs font-bold text-purple-300/80 uppercase tracking-wider mb-1.5">Your Name</label>
-        <input type="text" id="loginUser" required placeholder="e.g., Joshua Chongo" class="w-full bg-[#17102B]/80 border border-purple-500/20 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-purple-500 text-white">
+        <input type="text" id="loginUser" required placeholder="e.g., Jane Doe" class="w-full bg-[#17102B]/80 border border-purple-500/20 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-purple-500 text-white">
       </div>
       <div>
         <label class="block text-xs font-bold text-purple-300/80 uppercase tracking-wider mb-1.5">4-Digit Entry PIN</label>
@@ -45,6 +47,7 @@
   </div>
 
 
+  <!-- ================= VIEW 2: CREATE GROUP VIEW ================= -->
   <div id="createGroupView" class="w-full max-w-md bg-[#1F1638]/60 backdrop-blur-xl border border-purple-500/20 rounded-3xl p-6 md:p-8 shadow-[0_22px_70px_rgba(139,92,246,0.15)] hidden">
     <div class="text-center mb-6">
       <h1 class="text-2xl font-black text-white">Create New Chilimba</h1>
@@ -54,7 +57,7 @@
     <form id="createGroupForm" class="space-y-4">
       <div>
         <label class="block text-xs font-bold text-purple-300/80 uppercase tracking-wider mb-1.5">Group Name</label>
-        <input type="text" id="newGroupName" required placeholder="Chongo Streetwear Crew" class="w-full bg-[#17102B]/80 border border-purple-500/20 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-purple-500 text-white">
+        <input type="text" id="newGroupName" required placeholder="Alpha Savings Crew" class="w-full bg-[#17102B]/80 border border-purple-500/20 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-purple-500 text-white">
       </div>
       <div class="grid grid-cols-2 gap-4">
         <div>
@@ -66,13 +69,27 @@
           <input type="password" id="newGroupPin" required maxlength="4" pattern="\d{4}" placeholder="1234" class="w-full bg-[#17102B]/80 border border-purple-500/20 rounded-xl px-4 py-3 text-center font-bold tracking-widest focus:outline-none focus:border-purple-500 text-white">
         </div>
       </div>
+      <div class="grid grid-cols-2 gap-4">
+        <div>
+          <label class="block text-xs font-bold text-purple-300/80 uppercase tracking-wider mb-1.5">Duration Length</label>
+          <input type="number" id="newGroupDurationNum" required min="1" placeholder="5" class="w-full bg-[#17102B]/80 border border-purple-500/20 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-purple-500 text-white">
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-purple-300/80 uppercase tracking-wider mb-1.5">Time Unit</label>
+          <select id="newGroupDurationUnit" class="w-full bg-[#17102B]/80 border border-purple-500/20 rounded-xl px-4 py-3 text-sm focus:outline-none text-white">
+            <option value="Months">Months</option>
+            <option value="Weeks">Weeks</option>
+            <option value="Rounds">Rounds</option>
+          </select>
+        </div>
+      </div>
       <div>
         <label class="block text-xs font-bold text-purple-300/80 uppercase tracking-wider mb-1.5">Group Admin Name</label>
-        <input type="text" id="newGroupAdmin" required placeholder="Your full name" class="w-full bg-[#17102B]/80 border border-purple-500/20 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-purple-500 text-white">
+        <input type="text" id="newGroupAdmin" required placeholder="Admin full name" class="w-full bg-[#17102B]/80 border border-purple-500/20 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-purple-500 text-white">
       </div>
       <div>
         <label class="block text-xs font-bold text-purple-300/80 uppercase tracking-wider mb-1.5">Add Members (One name per line)</label>
-        <textarea id="newGroupMembers" required rows="4" placeholder="Mwansa Kachesa&#10;Bwalya Tembo&#10;Chileshe Banda" class="w-full bg-[#17102B]/80 border border-purple-500/20 rounded-xl p-4 text-sm focus:outline-none focus:border-purple-500 text-white"></textarea>
+        <textarea id="newGroupMembers" required rows="4" placeholder="John Smith&#10;Alice Jones&#10;Bob Johnson" class="w-full bg-[#17102B]/80 border border-purple-500/20 rounded-xl p-4 text-sm focus:outline-none focus:border-purple-500 text-white"></textarea>
       </div>
       
       <button type="submit" class="w-full bg-gradient-to-r from-emerald-400 to-teal-500 text-[#0B0813] font-black text-xs uppercase tracking-widest py-3.5 rounded-xl transition-all shadow-lg">
@@ -88,8 +105,10 @@
   </div>
 
 
+  <!-- ================= VIEW 3: MAIN HUB DASHBOARD ================= -->
   <div id="dashboardView" class="w-full max-w-2xl bg-[#1F1638]/60 backdrop-blur-xl border border-purple-500/20 rounded-3xl p-6 md:p-8 shadow-[0_22px_70px_rgba(139,92,246,0.15)] hidden">
     
+    <!-- Dashboard Top Bar -->
     <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-purple-500/10 pb-6 mb-6">
       <div>
         <div class="flex items-center gap-2 mb-1">
@@ -97,13 +116,29 @@
           <button onclick="logout()" class="text-[10px] uppercase text-red-400 bg-red-500/10 px-2 py-0.5 rounded-full font-bold border border-red-500/20">Log Out</button>
         </div>
         <h1 id="dashGroupName" class="text-3xl font-black bg-gradient-to-r from-white via-slate-200 to-purple-300 bg-clip-text text-transparent tracking-tight">Group Title</h1>
+        <p id="dashDurationDisplay" class="text-xs text-purple-300/60 mt-0.5">Total Duration: Running Scheme</p>
       </div>
-      <div class="bg-emerald-500/10 border border-emerald-500/20 rounded-2xl px-4 py-2">
-        <span class="text-[10px] uppercase text-emerald-400/70 tracking-wider block font-bold">Total Expected Rotation Pool</span>
-        <span id="dashPoolTotal" class="text-2xl font-black text-emerald-400 tracking-tight">K0</span>
+      
+      <!-- Target Pool Header Card -->
+      <div class="bg-emerald-500/10 border border-emerald-500/20 rounded-2xl px-4 py-2 relative group">
+        <span class="text-[10px] uppercase text-emerald-400/70 tracking-wider block font-bold">Total Expected Pool</span>
+        <div class="flex items-center gap-2">
+          <span id="dashPoolTotal" class="text-2xl font-black text-emerald-400 tracking-tight">K0</span>
+          <button id="adminEditPoolBtn" onclick="toggleEditTargetForm()" class="text-xs bg-emerald-500/20 text-emerald-300 px-2 py-0.5 rounded hover:bg-emerald-500/40 hidden">Edit</button>
+        </div>
+        
+        <!-- Hidden Edit Target Input Box -->
+        <div id="editTargetWrapper" class="absolute top-full right-0 mt-2 bg-[#17102B] border border-purple-500/40 p-3 rounded-xl shadow-xl hidden z-30 w-48">
+          <label class="block text-[10px] text-purple-300 uppercase font-bold mb-1">Modify Target (K)</label>
+          <div class="flex gap-1.5">
+            <input type="number" id="editTargetInput" class="w-full bg-purple-950/50 border border-purple-500/20 text-xs px-2 py-1 rounded text-white font-bold focus:outline-none">
+            <button onclick="saveNewProfitTarget()" class="bg-emerald-500 text-gray-950 font-black text-xs px-2.5 rounded">Save</button>
+          </div>
+        </div>
       </div>
     </div>
 
+    <!-- RANDOMIZER CONSOLE PANEL -->
     <div id="adminDrawBox" class="bg-purple-900/30 border border-purple-500/30 rounded-2xl p-5 mb-6 hidden">
       <div class="flex items-center justify-between flex-wrap gap-4">
         <div>
@@ -116,11 +151,13 @@
       </div>
     </div>
 
+    <!-- DYNAMIC PAYMENT TRACKER INPUT PANEL -->
     <div id="adminPaymentInputBox" class="bg-indigo-950/40 border border-indigo-500/30 rounded-2xl p-5 mb-6 hidden">
       <h3 class="text-sm font-black text-white uppercase tracking-wider mb-3">💵 Log Custom Payment Amount</h3>
       <form id="paymentLogForm" class="grid grid-cols-1 md:grid-cols-3 gap-3">
         <select id="paymentSelectMember" class="bg-[#17102B] border border-purple-500/20 rounded-xl px-3 py-2 text-xs focus:outline-none text-white">
-          </select>
+          <!-- Populated via script -->
+        </select>
         <input type="number" id="paymentAmountInput" placeholder="Enter Amount (K)" class="bg-[#17102B] border border-purple-500/20 rounded-xl px-3 py-2 text-xs focus:outline-none text-white">
         <button type="submit" class="bg-gradient-to-r from-emerald-400 to-teal-500 text-[#0B0813] font-black text-xs uppercase tracking-widest py-2 rounded-xl">
           Log Payment
@@ -128,6 +165,7 @@
       </form>
     </div>
 
+    <!-- Live Performance Metrics -->
     <div class="grid grid-cols-2 gap-4 mb-6">
       <div class="bg-[#291E47]/40 border border-purple-500/10 rounded-2xl p-4">
         <span class="text-[10px] uppercase text-purple-300/50 tracking-wider font-bold block mb-1">Target Base Rate</span>
@@ -139,27 +177,31 @@
       </div>
     </div>
 
+    <!-- Interactive Ledger Records Table -->
     <div class="bg-[#17102B]/80 border border-purple-500/10 rounded-2xl overflow-hidden mb-6">
       <div class="p-4 bg-[#21173D]/40 font-bold text-xs uppercase tracking-wider text-purple-300/70 border-b border-purple-500/10 flex justify-between">
         <span>Draw Position Lineup</span>
         <span>Balance Ledger</span>
       </div>
       <ul id="memberListContainer" class="divide-y divide-purple-500/5">
-        </ul>
+        <!-- Injected via JavaScript -->
+      </ul>
     </div>
 
-    <div class="bg-gradient-to-r from-[#221644] to-[#2D164C] border border-purple-500/20 rounded-2xl p-5">
-      <div class="flex items-center gap-2 mb-1.5">
-        <span class="text-base">📋</span>
-        <h3 class="text-sm font-black uppercase tracking-wider text-purple-200">WhatsApp Broadcast Engine</h3>
-      </div>
-      <p class="text-xs text-purple-300/70 mb-4">Copy the ledger status report instantly to broadcast straight to your group thread.</p>
-      <button onclick="copyBroadcast()" class="w-full bg-gradient-to-r from-emerald-400 to-teal-500 text-[#0B0813] font-black text-xs uppercase tracking-widest py-3 px-4 rounded-xl transition-all shadow-md">
-        Copy Broadcast System Text
+    <!-- COMPREHENSIVE ACTIONS BAR -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <button onclick="copyBroadcast()" class="md:col-span-2 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white font-black text-xs uppercase tracking-widest py-4 px-4 rounded-xl transition-all shadow-md">
+        📋 Copy WhatsApp Update
+      </button>
+
+      <!-- SAFE LOCKED RESET BUTTON -->
+      <button id="adminResetCycleBtn" onclick="triggerCycleReset()" disabled class="bg-gray-800 border border-gray-700 text-gray-500 cursor-not-allowed font-black text-xs uppercase tracking-widest py-4 px-4 rounded-xl transition-all shadow-md hidden">
+        🔒 Locked (Await Payments)
       </button>
     </div>
   </div>
 
+  <!-- ================= MASTER APPLICATION JS JAVASCRIPT ENGINE ================= -->
   <script>
     let activeGroup = null;
     let currentUserSession = null;
@@ -171,26 +213,24 @@
       document.getElementById(viewId).classList.remove('hidden');
     }
 
-    // SLIDE DOWN POPUP ALERT ACTION
     function triggerAlertNotification(message) {
       const banner = document.getElementById('alertBanner');
       document.getElementById('alertMessage').innerText = message;
-      
       banner.classList.remove('opacity-0', 'pointer-events-none');
       banner.classList.add('opacity-100');
-
       setTimeout(() => {
         banner.classList.remove('opacity-100');
         banner.classList.add('opacity-0', 'pointer-events-none');
       }, 4000);
     }
 
-    // HANDLER: REGISTERING A NEW GROUP PROFILE
     document.getElementById('createGroupForm').addEventListener('submit', function(e) {
       e.preventDefault();
       const name = document.getElementById('newGroupName').value.trim();
       const amount = parseInt(document.getElementById('newGroupAmount').value);
       const pin = document.getElementById('newGroupPin').value.trim();
+      const durationNum = document.getElementById('newGroupDurationNum').value;
+      const durationUnit = document.getElementById('newGroupDurationUnit').value;
       const admin = document.getElementById('newGroupAdmin').value.trim();
       const memberLines = document.getElementById('newGroupMembers').value.split('\n');
 
@@ -201,16 +241,22 @@
         }
       });
 
-      const newChilimba = { name, amount, pin, admin, members, orderAssigned: false, currentRound: 1 };
+      const computedPoolTarget = members.length * amount;
+
+      const newChilimba = { 
+        name, amount, pin, admin, members, 
+        orderAssigned: false, currentRound: 1,
+        duration: `${durationNum} ${durationUnit}`,
+        customPoolTarget: computedPoolTarget
+      };
       
       localStorage.setItem(`chilimba_${name.toLowerCase()}`, JSON.stringify(newChilimba));
-      alert(`🎉 Group "${name}" created! Enter your name and 4-digit PIN to login.`);
+      alert(`🎉 Group "${name}" created successfully for a duration of ${durationNum} ${durationUnit}!`);
       
       this.reset();
       switchView('loginView');
     });
 
-    // HANDLER: ACCESS AUTHENTICATION LOGIN SECURE FORM
     document.getElementById('loginForm').addEventListener('submit', function(e) {
       e.preventDefault();
       const groupNameInput = document.getElementById('loginGroup').value.trim();
@@ -218,14 +264,12 @@
       const pinInput = document.getElementById('loginPin').value.trim();
 
       const storedGroupRaw = localStorage.getItem(`chilimba_${groupNameInput.toLowerCase()}`);
-      
       if(!storedGroupRaw) {
         alert("❌ Group name not found in registration tracks.");
         return;
       }
 
       const groupData = JSON.parse(storedGroupRaw);
-
       if(groupData.pin !== pinInput) {
         alert("❌ Access denied. Incorrect 4-Digit Entry PIN.");
         return;
@@ -239,11 +283,9 @@
 
       activeGroup = groupData;
       currentUserSession = userMatch;
-      
       launchDashboard();
     });
 
-    // CORE LOGIC: EXECUTE RANDOM SHUFFLE DRAW FOR MEMBERS
     function triggerRandomDraw() {
       if(!activeGroup) return;
 
@@ -260,12 +302,10 @@
 
       activeGroup.orderAssigned = true;
       saveGroupData();
-      
       triggerAlertNotification("🎲 Draw Complete! Rotation positions permanently generated.");
       launchDashboard();
     }
 
-    // HANDLER: ADMIN LOGS SPECIFIC CUSTOM PAYMENT
     document.getElementById('paymentLogForm').addEventListener('submit', function(e) {
       e.preventDefault();
       const targetName = document.getElementById('paymentSelectMember').value;
@@ -282,28 +322,76 @@
         activeGroup.members[memberIndex].paidAmount = parsedAmount;
         
         saveGroupData();
-        
-        // ALERT TRIGGERS IMMEDIATELY FOR ADMIN VISUAL CONFIRMATION
         triggerAlertNotification(`🔔 PAYMENT ALERT: ${targetName} paid K${parsedAmount}!`);
-        
         document.getElementById('paymentAmountInput').value = "";
         launchDashboard();
       }
     });
 
-    // BUILD AND UPDATE THE DASHBOARD SCREEN CONTROLS
+    function toggleEditTargetForm() {
+      const wrapper = document.getElementById('editTargetWrapper');
+      document.getElementById('editTargetInput').value = activeGroup.customPoolTarget;
+      wrapper.classList.toggle('hidden');
+    }
+
+    function saveNewProfitTarget() {
+      const inputVal = parseFloat(document.getElementById('editTargetInput').value);
+      if(isNaN(inputVal) || inputVal <= 0) {
+        alert("Enter a valid target pool amount.");
+        return;
+      }
+      activeGroup.customPoolTarget = inputVal;
+      saveGroupData();
+      document.getElementById('editTargetWrapper').classList.add('hidden');
+      triggerAlertNotification(`🎯 Target Pool adjusted to K${inputVal}!`);
+      launchDashboard();
+    }
+
+    function triggerCycleReset() {
+      const allHavePaid = activeGroup.members.every(m => m.isPaid === true);
+      if(!allHavePaid) {
+        alert("Security Lock: You can only reset the cycle once all registered members are marked Paid.");
+        return;
+      }
+
+      if(confirm("Confirm Cycle Reset? This will wipe payment balances and increment the rotation round for your crew.")){
+        activeGroup.members.forEach(m => {
+          m.isPaid = false;
+          m.paidAmount = 0;
+        });
+        activeGroup.currentRound += 1;
+        saveGroupData();
+        triggerAlertNotification(`🔄 Cycle Reset Successful! Welcome to Round ${activeGroup.currentRound}.`);
+        launchDashboard();
+      }
+    }
+
     function launchDashboard() {
       document.getElementById('dashGroupName').innerText = activeGroup.name;
       document.getElementById('dashContributionAmount').innerText = `K${activeGroup.amount}`;
-      document.getElementById('dashPoolTotal').innerText = `K${activeGroup.members.length * activeGroup.amount}`;
+      document.getElementById('dashDurationDisplay').innerText = `Total Scheme Duration Cycle: ${activeGroup.duration || 'Not Configured'}`;
+      document.getElementById('dashPoolTotal').innerText = `K${activeGroup.customPoolTarget}`;
 
       const isUserAdmin = currentUserSession.name.toLowerCase() === activeGroup.admin.toLowerCase();
+      const resetBtn = document.getElementById('adminResetCycleBtn');
       
-      // Toggle custom controller display layers
       if(isUserAdmin) {
         document.getElementById('userBadge').innerText = "👑 ADMIN SESSION";
         document.getElementById('adminPaymentInputBox').classList.remove('hidden');
+        document.getElementById('adminEditPoolBtn').classList.remove('hidden');
+        resetBtn.classList.remove('hidden');
         
+        const allSettled = activeGroup.members.every(m => m.isPaid === true);
+        if(allSettled) {
+          resetBtn.disabled = false;
+          resetBtn.className = "bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-400 hover:to-orange-500 text-gray-950 font-black text-xs uppercase tracking-widest py-4 px-4 rounded-xl transition-all shadow-md cursor-pointer";
+          resetBtn.innerText = "🔄 Reset Next Round";
+        } else {
+          resetBtn.disabled = true;
+          resetBtn.className = "bg-gray-800/50 border border-gray-700/50 text-purple-300/20 font-black text-xs uppercase tracking-widest py-4 px-4 rounded-xl transition-all cursor-not-allowed";
+          resetBtn.innerText = "🔒 Locked (Await Payments)";
+        }
+
         if(!activeGroup.orderAssigned) {
           document.getElementById('adminDrawBox').classList.remove('hidden');
         } else {
@@ -314,12 +402,13 @@
         document.getElementById('userBadge').innerText = "👤 MEMBER: " + currentUserSession.name.toUpperCase();
         document.getElementById('adminPaymentInputBox').classList.add('hidden');
         document.getElementById('adminDrawBox').classList.add('hidden');
+        document.getElementById('adminEditPoolBtn').classList.add('hidden');
+        resetBtn.classList.add('hidden');
       }
 
-      // Display Target Recipient Tracking
       if(activeGroup.orderAssigned) {
         const currentLuckyPerson = activeGroup.members.find(m => m.position === activeGroup.currentRound);
-        document.getElementById('dashCurrentRecipient').innerText = currentLuckyPerson ? currentLuckyPerson.name : "Cycle Ended";
+        document.getElementById('dashCurrentRecipient').innerText = currentLuckyPerson ? `${currentLuckyPerson.name} (Round ${activeGroup.currentRound})` : "Cycle Ended";
       } else {
         document.getElementById('dashCurrentRecipient').innerText = "Awaiting Draw";
       }
@@ -328,7 +417,6 @@
       switchView('dashboardView');
     }
 
-    // INJECT IN-APP DROPDOWN SELECTION NAMES FOR PAYMENT
     function populateAdminDropdown() {
       const dropdown = document.getElementById('paymentSelectMember');
       dropdown.innerHTML = "";
@@ -340,7 +428,6 @@
       });
     }
 
-    // COMPILE ROSTER CARDS ORDERED BY POSITION
     function renderRosterRows() {
       const container = document.getElementById('memberListContainer');
       container.innerHTML = "";
@@ -353,7 +440,6 @@
       listData.forEach((member, idx) => {
         const row = document.createElement('li');
         row.className = "p-4 flex justify-between items-center bg-purple-950/10 hover:bg-purple-500/5 transition-colors";
-        
         const positionText = activeGroup.orderAssigned ? `Pos ${member.position}` : `Pending`;
 
         const badgeState = member.isPaid 
@@ -374,11 +460,11 @@
       });
     }
 
-    // PARSER MECHANISM FOR WHATSAPP GROUP CHAT COMPILATION
     function copyBroadcast() {
-      let msg = `*🇿🇲 ${activeGroup.name.toUpperCase()} HUB REPORT* \n\n`;
-      msg += `💰 *Base Contribution Rate:* K${activeGroup.amount}\n`;
-      msg += `🎰 *Expected Total Cycle Value:* K${activeGroup.members.length * activeGroup.amount}\n\n`;
+      let msg = `*🇿🇲 ${activeGroup.name.toUpperCase()} HUB REPORT - ROUND ${activeGroup.currentRound}* \n\n`;
+      msg += `⏱️ *Scheme Duration:* ${activeGroup.duration}\n`;
+      msg += `🎯 *Target Expected Pool:* K${activeGroup.customPoolTarget}\n`;
+      msg += `💰 *Base Member Contribution:* K${activeGroup.amount}\n\n`;
       msg += `📋 *Roster Rotation Statement:* \n`;
 
       let sortedRecords = [...activeGroup.members].sort((a,b) => a.position - b.position);
@@ -388,7 +474,7 @@
       });
 
       navigator.clipboard.writeText(msg);
-      alert("📋 Copied to clipboard! Switch to WhatsApp and paste it into your chat room.");
+      alert("📋 Copied to clipboard! Ready to paste into WhatsApp.");
     }
 
     function saveGroupData() {
