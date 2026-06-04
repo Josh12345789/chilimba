@@ -3,20 +3,19 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Chilimba Max - Standard Edition</title>
+  <title>Chilimba Max - Cloud Connected Edition</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body class="bg-gradient-to-br from-[#0B0813] via-[#160F29] to-[#0B0813] min-h-screen text-slate-100 p-4 md:p-8 flex items-center justify-center font-sans">
 
-  <!-- DYNAMIC ADMIN ALERT SYSTEM -->
   <div id="alertBanner" class="fixed top-5 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-emerald-400 to-teal-500 text-gray-950 font-black text-sm px-6 py-3 rounded-xl shadow-[0_10px_30px_rgba(16,185,129,0.3)] z-50 transition-all duration-300 opacity-0 pointer-events-none">
     <span id="alertMessage">Notification Alert</span>
   </div>
 
-  <!-- ================= VIEW 1: LOGIN VIEW ================= -->
   <div id="loginView" class="w-full max-w-md bg-[#1F1638]/60 backdrop-blur-xl border border-purple-500/20 rounded-3xl p-6 md:p-8 shadow-[0_22px_70px_rgba(139,92,246,0.15)]">
     <div class="text-center mb-6">
-      <span class="bg-purple-500/10 text-purple-400 border border-purple-500/20 text-[10px] uppercase tracking-widest font-black px-2.5 py-0.5 rounded-full">Secure Portal</span>
+      <span class="bg-purple-500/10 text-purple-400 border border-purple-500/20 text-[10px] uppercase tracking-widest font-black px-2.5 py-0.5 rounded-full">Secure Cloud Portal</span>
       <h1 class="text-3xl font-black bg-gradient-to-r from-white to-purple-300 bg-clip-text text-transparent mt-2">Chilimba Max</h1>
       <p class="text-xs text-purple-300/60 mt-1">Log into your group's workspace registry</p>
     </div>
@@ -46,8 +45,6 @@
     </div>
   </div>
 
-
-  <!-- ================= VIEW 2: CREATE GROUP VIEW ================= -->
   <div id="createGroupView" class="w-full max-w-md bg-[#1F1638]/60 backdrop-blur-xl border border-purple-500/20 rounded-3xl p-6 md:p-8 shadow-[0_22px_70px_rgba(139,92,246,0.15)] hidden">
     <div class="text-center mb-6">
       <h1 class="text-2xl font-black text-white">Create New Chilimba</h1>
@@ -104,22 +101,19 @@
     </div>
   </div>
 
-
-  <!-- ================= VIEW 3: MAIN HUB DASHBOARD ================= -->
   <div id="dashboardView" class="w-full max-w-2xl bg-[#1F1638]/60 backdrop-blur-xl border border-purple-500/20 rounded-3xl p-6 md:p-8 shadow-[0_22px_70px_rgba(139,92,246,0.15)] hidden">
     
-    <!-- Dashboard Top Bar -->
     <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-purple-500/10 pb-6 mb-6">
       <div>
         <div class="flex items-center gap-2 mb-1">
           <span class="bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 text-[10px] uppercase tracking-widest font-black px-2.5 py-0.5 rounded-full" id="userBadge">Session</span>
           <button onclick="logout()" class="text-[10px] uppercase text-red-400 bg-red-500/10 px-2 py-0.5 rounded-full font-bold border border-red-500/20">Log Out</button>
+          <button onclick="fetchLatestGroupData()" class="text-[10px] uppercase text-purple-400 bg-purple-500/10 px-2 py-0.5 rounded-full font-bold border border-purple-500/20">🔄 Refresh</button>
         </div>
         <h1 id="dashGroupName" class="text-3xl font-black bg-gradient-to-r from-white via-slate-200 to-purple-300 bg-clip-text text-transparent tracking-tight">Group Title</h1>
         <p id="dashDurationDisplay" class="text-xs text-purple-300/60 mt-0.5">Total Duration: Running Scheme</p>
       </div>
       
-      <!-- Target Pool Header Card -->
       <div class="bg-emerald-500/10 border border-emerald-500/20 rounded-2xl px-4 py-2 relative group">
         <span class="text-[10px] uppercase text-emerald-400/70 tracking-wider block font-bold">Total Expected Pool</span>
         <div class="flex items-center gap-2">
@@ -127,7 +121,6 @@
           <button id="adminEditPoolBtn" onclick="toggleEditTargetForm()" class="text-xs bg-emerald-500/20 text-emerald-300 px-2 py-0.5 rounded hover:bg-emerald-500/40 hidden">Edit</button>
         </div>
         
-        <!-- Hidden Edit Target Input Box -->
         <div id="editTargetWrapper" class="absolute top-full right-0 mt-2 bg-[#17102B] border border-purple-500/40 p-3 rounded-xl shadow-xl hidden z-30 w-48">
           <label class="block text-[10px] text-purple-300 uppercase font-bold mb-1">Modify Target (K)</label>
           <div class="flex gap-1.5">
@@ -138,7 +131,6 @@
       </div>
     </div>
 
-    <!-- RANDOMIZER CONSOLE PANEL -->
     <div id="adminDrawBox" class="bg-purple-900/30 border border-purple-500/30 rounded-2xl p-5 mb-6 hidden">
       <div class="flex items-center justify-between flex-wrap gap-4">
         <div>
@@ -151,13 +143,11 @@
       </div>
     </div>
 
-    <!-- DYNAMIC PAYMENT TRACKER INPUT PANEL -->
     <div id="adminPaymentInputBox" class="bg-indigo-950/40 border border-indigo-500/30 rounded-2xl p-5 mb-6 hidden">
       <h3 class="text-sm font-black text-white uppercase tracking-wider mb-3">💵 Log Custom Payment Amount</h3>
       <form id="paymentLogForm" class="grid grid-cols-1 md:grid-cols-3 gap-3">
         <select id="paymentSelectMember" class="bg-[#17102B] border border-purple-500/20 rounded-xl px-3 py-2 text-xs focus:outline-none text-white">
-          <!-- Populated via script -->
-        </select>
+          </select>
         <input type="number" id="paymentAmountInput" placeholder="Enter Amount (K)" class="bg-[#17102B] border border-purple-500/20 rounded-xl px-3 py-2 text-xs focus:outline-none text-white">
         <button type="submit" class="bg-gradient-to-r from-emerald-400 to-teal-500 text-[#0B0813] font-black text-xs uppercase tracking-widest py-2 rounded-xl">
           Log Payment
@@ -165,7 +155,6 @@
       </form>
     </div>
 
-    <!-- Live Performance Metrics -->
     <div class="grid grid-cols-2 gap-4 mb-6">
       <div class="bg-[#291E47]/40 border border-purple-500/10 rounded-2xl p-4">
         <span class="text-[10px] uppercase text-purple-300/50 tracking-wider font-bold block mb-1">Target Base Rate</span>
@@ -177,32 +166,33 @@
       </div>
     </div>
 
-    <!-- Interactive Ledger Records Table -->
     <div class="bg-[#17102B]/80 border border-purple-500/10 rounded-2xl overflow-hidden mb-6">
       <div class="p-4 bg-[#21173D]/40 font-bold text-xs uppercase tracking-wider text-purple-300/70 border-b border-purple-500/10 flex justify-between">
         <span>Draw Position Lineup</span>
         <span>Balance Ledger</span>
       </div>
       <ul id="memberListContainer" class="divide-y divide-purple-500/5">
-        <!-- Injected via JavaScript -->
-      </ul>
+        </ul>
     </div>
 
-    <!-- COMPREHENSIVE ACTIONS BAR -->
     <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
       <button onclick="copyBroadcast()" class="md:col-span-2 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white font-black text-xs uppercase tracking-widest py-4 px-4 rounded-xl transition-all shadow-md">
         📋 Copy WhatsApp Update
       </button>
 
-      <!-- SAFE LOCKED RESET BUTTON -->
       <button id="adminResetCycleBtn" onclick="triggerCycleReset()" disabled class="bg-gray-800 border border-gray-700 text-gray-500 cursor-not-allowed font-black text-xs uppercase tracking-widest py-4 px-4 rounded-xl transition-all shadow-md hidden">
         🔒 Locked (Await Payments)
       </button>
     </div>
   </div>
 
-  <!-- ================= MASTER APPLICATION JS JAVASCRIPT ENGINE ================= -->
   <script>
+    // CONNECT TO YOUR LIVE DATABASE BRAIN HERE
+    const SUPABASE_URL = "https://fzveiucykwcumcgjyphv.supabase.co/rest/v1/";
+    const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZ6dmVpdWN5a3djdW1jZ2p5cGh2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA1OTI2NDcsImV4cCI6MjA5NjE2ODY0N30.V1bqzs5LFW9pJ5AJyCL2Ky4CurkUcvEDOJPU84uA1y0";
+    
+    const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
     let activeGroup = null;
     let currentUserSession = null;
 
@@ -224,7 +214,8 @@
       }, 4000);
     }
 
-    document.getElementById('createGroupForm').addEventListener('submit', function(e) {
+    // CLOUD ROUTINE: DEPLOY TO THE DATABASE
+    document.getElementById('createGroupForm').addEventListener('submit', async function(e) {
       e.preventDefault();
       const name = document.getElementById('newGroupName').value.trim();
       const amount = parseInt(document.getElementById('newGroupAmount').value);
@@ -243,67 +234,108 @@
 
       const computedPoolTarget = members.length * amount;
 
-      const newChilimba = { 
-        name, amount, pin, admin, members, 
-        orderAssigned: false, currentRound: 1,
-        duration: `${durationNum} ${durationUnit}`,
-        customPoolTarget: computedPoolTarget
-      };
-      
-      localStorage.setItem(`chilimba_${name.toLowerCase()}`, JSON.stringify(newChilimba));
-      alert(`🎉 Group "${name}" created successfully for a duration of ${durationNum} ${durationUnit}!`);
-      
-      this.reset();
-      switchView('loginView');
+      const { data, error } = await _supabase
+        .from('chilimba_groups')
+        .insert([{
+          group_name: name,
+          amount: amount,
+          pin: pin,
+          duration: `${durationNum} ${durationUnit}`,
+          admin_name: admin,
+          custom_pool_target: computedPoolTarget,
+          members: members
+        }]);
+
+      if (error) {
+        alert("❌ Error deploying group. Name might already be taken.");
+        console.error(error);
+      } else {
+        alert(`🎉 Cloud Group "${name}" created successfully! Everyone can login now.`);
+        this.reset();
+        switchView('loginView');
+      }
     });
 
-    document.getElementById('loginForm').addEventListener('submit', function(e) {
+    // CLOUD ROUTINE: ACCESS AUTHENTICATION VIA DATABASE INTERACTION
+    document.getElementById('loginForm').addEventListener('submit', async function(e) {
       e.preventDefault();
       const groupNameInput = document.getElementById('loginGroup').value.trim();
       const userNameInput = document.getElementById('loginUser').value.trim();
       const pinInput = document.getElementById('loginPin').value.trim();
 
-      const storedGroupRaw = localStorage.getItem(`chilimba_${groupNameInput.toLowerCase()}`);
-      if(!storedGroupRaw) {
-        alert("❌ Group name not found in registration tracks.");
+      const { data, error } = await _supabase
+        .from('chilimba_groups')
+        .select('*')
+        .eq('group_name', groupNameInput)
+        .single();
+
+      if(error || !data) {
+        alert("❌ Group not found in the database.");
         return;
       }
 
-      const groupData = JSON.parse(storedGroupRaw);
-      if(groupData.pin !== pinInput) {
+      if(data.pin !== pinInput) {
         alert("❌ Access denied. Incorrect 4-Digit Entry PIN.");
         return;
       }
 
-      const userMatch = groupData.members.find(m => m.name.toLowerCase() === userNameInput.toLowerCase());
+      const userMatch = data.members.find(m => m.name.toLowerCase() === userNameInput.toLowerCase());
       if(!userMatch) {
-        alert(`❌ Error: Your name "${userNameInput}" is not on this group's member roster.`);
+        alert(`❌ Error: "${userNameInput}" is not on this member roster.`);
         return;
       }
 
-      activeGroup = groupData;
+      activeGroup = data;
       currentUserSession = userMatch;
       launchDashboard();
     });
 
+    // SYNC REFRESH ENGINE FOR ACTIVE DASHBOARD SESSIONS
+    async function fetchLatestGroupData() {
+      if(!activeGroup) return;
+      const { data } = await _supabase
+        .from('chilimba_groups')
+        .select('*')
+        .eq('id', activeGroup.id)
+        .single();
+      
+      if(data) {
+        activeGroup = data;
+        // Keep personal user session array map current
+        currentUserSession = data.members.find(m => m.name.toLowerCase() === currentUserSession.name.toLowerCase());
+        launchDashboard();
+        triggerAlertNotification("🔄 Dashboard updated with live cloud data.");
+      }
+    }
+
+    async function pushGroupUpdateToCloud() {
+      await _supabase
+        .from('chilimba_groups')
+        .update({
+          members: activeGroup.members,
+          order_assigned: activeGroup.order_assigned,
+          custom_pool_target: activeGroup.custom_pool_target,
+          current_round: activeGroup.current_round
+        })
+        .eq('id', activeGroup.id);
+    }
+
     function triggerRandomDraw() {
       if(!activeGroup) return;
-
       let shuffledArray = [...activeGroup.members];
       for (let i = shuffledArray.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
         [shuffledArray[i], shuffledArray[j]] = [shuffledArray[j], shuffledArray[i]];
       }
-
       shuffledArray.forEach((member, index) => {
         const originalIndex = activeGroup.members.findIndex(m => m.name === member.name);
         activeGroup.members[originalIndex].position = index + 1;
       });
-
-      activeGroup.orderAssigned = true;
-      saveGroupData();
-      triggerAlertNotification("🎲 Draw Complete! Rotation positions permanently generated.");
-      launchDashboard();
+      activeGroup.order_assigned = true;
+      pushGroupUpdateToCloud().then(() => {
+        triggerAlertNotification("🎲 Draw Sync Complete!");
+        launchDashboard();
+      });
     }
 
     document.getElementById('paymentLogForm').addEventListener('submit', function(e) {
@@ -312,7 +344,7 @@
       const parsedAmount = parseFloat(document.getElementById('paymentAmountInput').value);
 
       if(isNaN(parsedAmount) || parsedAmount <= 0) {
-        alert("❌ Please enter a valid payment amount.");
+        alert("❌ Invalid payment amount.");
         return;
       }
 
@@ -321,58 +353,55 @@
         activeGroup.members[memberIndex].isPaid = true;
         activeGroup.members[memberIndex].paidAmount = parsedAmount;
         
-        saveGroupData();
-        triggerAlertNotification(`🔔 PAYMENT ALERT: ${targetName} paid K${parsedAmount}!`);
-        document.getElementById('paymentAmountInput').value = "";
-        launchDashboard();
+        pushGroupUpdateToCloud().then(() => {
+          triggerAlertNotification(`🔔 Payment Synced: ${targetName} paid K${parsedAmount}!`);
+          document.getElementById('paymentAmountInput').value = "";
+          launchDashboard();
+        });
       }
     });
 
     function toggleEditTargetForm() {
       const wrapper = document.getElementById('editTargetWrapper');
-      document.getElementById('editTargetInput').value = activeGroup.customPoolTarget;
+      document.getElementById('editTargetInput').value = activeGroup.custom_pool_target;
       wrapper.classList.toggle('hidden');
     }
 
     function saveNewProfitTarget() {
       const inputVal = parseFloat(document.getElementById('editTargetInput').value);
-      if(isNaN(inputVal) || inputVal <= 0) {
-        alert("Enter a valid target pool amount.");
-        return;
-      }
-      activeGroup.customPoolTarget = inputVal;
-      saveGroupData();
-      document.getElementById('editTargetWrapper').classList.add('hidden');
-      triggerAlertNotification(`🎯 Target Pool adjusted to K${inputVal}!`);
-      launchDashboard();
+      if(isNaN(inputVal) || inputVal <= 0) return;
+      activeGroup.custom_pool_target = inputVal;
+      pushGroupUpdateToCloud().then(() => {
+        document.getElementById('editTargetWrapper').classList.add('hidden');
+        triggerAlertNotification(`🎯 Pool target adjusted to K${inputVal}!`);
+        launchDashboard();
+      });
     }
 
     function triggerCycleReset() {
       const allHavePaid = activeGroup.members.every(m => m.isPaid === true);
-      if(!allHavePaid) {
-        alert("Security Lock: You can only reset the cycle once all registered members are marked Paid.");
-        return;
-      }
+      if(!allHavePaid) return;
 
-      if(confirm("Confirm Cycle Reset? This will wipe payment balances and increment the rotation round for your crew.")){
+      if(confirm("Confirm Cycle Reset? This clears balances and increments the round across all devices.")){
         activeGroup.members.forEach(m => {
           m.isPaid = false;
           m.paidAmount = 0;
         });
-        activeGroup.currentRound += 1;
-        saveGroupData();
-        triggerAlertNotification(`🔄 Cycle Reset Successful! Welcome to Round ${activeGroup.currentRound}.`);
-        launchDashboard();
+        activeGroup.current_round += 1;
+        pushGroupUpdateToCloud().then(() => {
+          triggerAlertNotification(`🔄 Moved to Round ${activeGroup.current_round}.`);
+          launchDashboard();
+        });
       }
     }
 
     function launchDashboard() {
-      document.getElementById('dashGroupName').innerText = activeGroup.name;
+      document.getElementById('dashGroupName').innerText = activeGroup.group_name;
       document.getElementById('dashContributionAmount').innerText = `K${activeGroup.amount}`;
-      document.getElementById('dashDurationDisplay').innerText = `Total Scheme Duration Cycle: ${activeGroup.duration || 'Not Configured'}`;
-      document.getElementById('dashPoolTotal').innerText = `K${activeGroup.customPoolTarget}`;
+      document.getElementById('dashDurationDisplay').innerText = `Total Scheme Duration Cycle: ${activeGroup.duration}`;
+      document.getElementById('dashPoolTotal').innerText = `K${activeGroup.custom_pool_target}`;
 
-      const isUserAdmin = currentUserSession.name.toLowerCase() === activeGroup.admin.toLowerCase();
+      const isUserAdmin = currentUserSession.name.toLowerCase() === activeGroup.admin_name.toLowerCase();
       const resetBtn = document.getElementById('adminResetCycleBtn');
       
       if(isUserAdmin) {
@@ -384,7 +413,7 @@
         const allSettled = activeGroup.members.every(m => m.isPaid === true);
         if(allSettled) {
           resetBtn.disabled = false;
-          resetBtn.className = "bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-400 hover:to-orange-500 text-gray-950 font-black text-xs uppercase tracking-widest py-4 px-4 rounded-xl transition-all shadow-md cursor-pointer";
+          resetBtn.className = "bg-gradient-to-r from-amber-500 to-orange-600 text-gray-950 font-black text-xs uppercase tracking-widest py-4 px-4 rounded-xl transition-all shadow-md cursor-pointer";
           resetBtn.innerText = "🔄 Reset Next Round";
         } else {
           resetBtn.disabled = true;
@@ -392,7 +421,7 @@
           resetBtn.innerText = "🔒 Locked (Await Payments)";
         }
 
-        if(!activeGroup.orderAssigned) {
+        if(!activeGroup.order_assigned) {
           document.getElementById('adminDrawBox').classList.remove('hidden');
         } else {
           document.getElementById('adminDrawBox').classList.add('hidden');
@@ -406,9 +435,9 @@
         resetBtn.classList.add('hidden');
       }
 
-      if(activeGroup.orderAssigned) {
-        const currentLuckyPerson = activeGroup.members.find(m => m.position === activeGroup.currentRound);
-        document.getElementById('dashCurrentRecipient').innerText = currentLuckyPerson ? `${currentLuckyPerson.name} (Round ${activeGroup.currentRound})` : "Cycle Ended";
+      if(activeGroup.order_assigned) {
+        const currentLuckyPerson = activeGroup.members.find(m => m.position === activeGroup.current_round);
+        document.getElementById('dashCurrentRecipient').innerText = currentLuckyPerson ? `${currentLuckyPerson.name} (Round ${activeGroup.current_round})` : "Cycle Ended";
       } else {
         document.getElementById('dashCurrentRecipient').innerText = "Awaiting Draw";
       }
@@ -431,17 +460,13 @@
     function renderRosterRows() {
       const container = document.getElementById('memberListContainer');
       container.innerHTML = "";
-
       let listData = [...activeGroup.members];
-      if(activeGroup.orderAssigned) {
-        listData.sort((a, b) => a.position - b.position);
-      }
+      if(activeGroup.order_assigned) listData.sort((a, b) => a.position - b.position);
 
-      listData.forEach((member, idx) => {
+      listData.forEach(member => {
         const row = document.createElement('li');
         row.className = "p-4 flex justify-between items-center bg-purple-950/10 hover:bg-purple-500/5 transition-colors";
-        const positionText = activeGroup.orderAssigned ? `Pos ${member.position}` : `Pending`;
-
+        const positionText = activeGroup.order_assigned ? `Pos ${member.position}` : `Pending`;
         const badgeState = member.isPaid 
           ? `<span class="bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 text-[10px] font-black px-3 py-1 rounded-lg uppercase tracking-wider">Paid K${member.paidAmount}</span>`
           : `<span class="bg-pink-500/10 text-pink-400 border border-pink-500/20 text-[10px] font-black px-3 py-1 rounded-lg uppercase tracking-wider animate-pulse">Pending</span>`;
@@ -449,10 +474,7 @@
         row.innerHTML = `
           <div class="flex items-center gap-3">
             <div class="w-14 h-8 rounded-xl bg-purple-500/10 border border-purple-500/20 text-[10px] font-black text-purple-300 flex items-center justify-center">${positionText}</div>
-            <div>
-              <span class="font-bold text-sm tracking-wide text-slate-200">${member.name}</span>
-              ${member.isAdmin ? '<span class="text-[9px] bg-purple-500/30 text-purple-200 px-1.5 ml-1.5 rounded uppercase font-bold">Admin</span>' : ''}
-            </div>
+            <div><span class="font-bold text-sm tracking-wide text-slate-200">${member.name}</span></div>
           </div>
           <div>${badgeState}</div>
         `;
@@ -461,24 +483,18 @@
     }
 
     function copyBroadcast() {
-      let msg = `*🇿🇲 ${activeGroup.name.toUpperCase()} HUB REPORT - ROUND ${activeGroup.currentRound}* \n\n`;
+      let msg = `*🇿🇲 ${activeGroup.group_name.toUpperCase()} HUB REPORT - ROUND ${activeGroup.current_round}* \n\n`;
       msg += `⏱️ *Scheme Duration:* ${activeGroup.duration}\n`;
-      msg += `🎯 *Target Expected Pool:* K${activeGroup.customPoolTarget}\n`;
+      msg += `🎯 *Target Expected Pool:* K${activeGroup.custom_pool_target}\n`;
       msg += `💰 *Base Member Contribution:* K${activeGroup.amount}\n\n`;
       msg += `📋 *Roster Rotation Statement:* \n`;
-
       let sortedRecords = [...activeGroup.members].sort((a,b) => a.position - b.position);
       sortedRecords.forEach(m => {
-        const posFlag = activeGroup.orderAssigned ? `[Pos ${m.position}]` : `[Unsorted]`;
+        const posFlag = activeGroup.order_assigned ? `[Pos ${m.position}]` : `[Unsorted]`;
         msg += m.isPaid ? `✅ ${posFlag} ${m.name} - PAID K${m.paidAmount}\n` : `❌ ${posFlag} ${m.name} - PENDING\n`;
       });
-
       navigator.clipboard.writeText(msg);
-      alert("📋 Copied to clipboard! Ready to paste into WhatsApp.");
-    }
-
-    function saveGroupData() {
-      localStorage.setItem(`chilimba_${activeGroup.name.toLowerCase()}`, JSON.stringify(activeGroup));
+      alert("📋 Copied to clipboard!");
     }
 
     function logout() {
