@@ -1,0 +1,13 @@
+{
+  "name": "fifa-14-squad-update-to-fc26",
+  "version": "1.0.0",
+  "description": "",
+  "main": "chilimba.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs"
+}
