@@ -1,54 +1,134 @@
-<!-- Main Container -->
-<div class="p-6 max-w-4xl mx-auto bg-gray-900 text-white font-sans rounded-xl shadow-md">
-  
-  <!-- Header Section -->
-  <div class="border-b border-gray-700 pb-4 mb-6">
-    <h1 class="text-2xl font-bold text-green-400">Chilimba Tracker Dashboard</h1>
-    <p class="text-sm text-gray-400">Group: Chongo Streetwear Crew</p>
-  </div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chilimba Max - Digital Group Hub</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gradient-to-br from-[#0B0813] via-[#160F29] to-[#0B0813] min-h-screen text-slate-100 p-4 md:p-8 flex items-center justify-center font-sans">
 
-  <!-- Stats Grid -->
-  <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-    <div class="bg-gray-800 p-4 rounded-lg">
-      <span class="text-xs text-gray-400 block uppercase">Target Payout</span>
-      <span class="text-xl font-bold text-white">K2,500</span>
+  <!-- Main Application Wrapper -->
+  <div class="w-full max-w-2xl bg-[#1F1638]/60 backdrop-blur-xl border border-purple-500/20 rounded-3xl p-6 md:p-8 shadow-[0_22px_70px_rgba(139,92,246,0.15)] relative overflow-hidden">
+    
+    <!-- Neon Decorative Background Glow Elements -->
+    <div class="absolute -top-24 -left-24 w-48 h-48 bg-emerald-500/20 rounded-full blur-[80px] pointer-events-none"></div>
+    <div class="absolute -bottom-24 -right-24 w-48 h-48 bg-pink-500/20 rounded-full blur-[80px] pointer-events-none"></div>
+
+    <!-- Header Section -->
+    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-purple-500/10 pb-6 mb-6">
+      <div>
+        <div class="flex items-center gap-2 mb-1">
+          <span class="bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 text-[10px] uppercase tracking-widest font-black px-2.5 py-0.5 rounded-full">Active Cycle</span>
+        </div>
+        <h1 class="text-3xl font-black bg-gradient-to-r from-white via-slate-200 to-purple-300 bg-clip-text text-transparent tracking-tight">
+          Chongo Streetwear Crew
+        </h1>
+        <p class="text-xs text-purple-300/60 mt-0.5">Automated Group Rotating Registry</p>
+      </div>
+      
+      <!-- Quick Total Badge -->
+      <div class="bg-emerald-500/10 border border-emerald-500/20 rounded-2xl px-4 py-2 text-right self-start md:self-auto">
+        <span class="text-[10px] uppercase text-emerald-400/70 tracking-wider block font-bold">Total Rotation Pool</span>
+        <span class="text-2xl font-black text-emerald-400 tracking-tight">K2,500</span>
+      </div>
     </div>
-    <div class="bg-gray-800 p-4 rounded-lg">
-      <span class="text-xs text-gray-400 block uppercase">Current Round</span>
-      <span class="text-xl font-bold text-yellow-400">Round 1 / 5</span>
+
+    <!-- Live Performance Stats Board -->
+    <div class="grid grid-cols-2 gap-4 mb-6">
+      
+      <!-- Card 1: Active Round Indicator -->
+      <div class="bg-[#291E47]/40 border border-purple-500/10 rounded-2xl p-4 relative overflow-hidden group hover:border-purple-500/30 transition-all duration-300">
+        <span class="text-[10px] uppercase text-purple-300/50 tracking-wider font-bold block mb-1">Current Order Rotation</span>
+        <div class="flex items-baseline gap-1.5">
+          <span class="text-3xl font-black text-white tracking-tight">Round 1</span>
+          <span class="text-xs text-purple-400 font-medium">of 5</span>
+        </div>
+        <div class="w-full bg-purple-950 h-1.5 rounded-full mt-3 overflow-hidden">
+          <div class="bg-gradient-to-r from-purple-500 to-pink-500 h-full w-1/5 rounded-full"></div>
+        </div>
+      </div>
+
+      <!-- Card 2: Current Beneficiary -->
+      <div class="bg-[#291E47]/40 border border-purple-500/10 rounded-2xl p-4 relative overflow-hidden group hover:border-purple-500/30 transition-all duration-300">
+        <span class="text-[10px] uppercase text-emerald-400/60 tracking-wider font-bold block mb-1">Target Payout Recipient</span>
+        <span class="text-2xl font-black text-white tracking-tight flex items-center gap-2">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+          Mwansa
+        </span>
+        <span class="text-[11px] text-purple-300/40 block mt-2">Due cashout via Mobile Money</span>
+      </div>
+
     </div>
-    <div class="bg-gray-800 p-4 rounded-lg">
-      <span class="text-xs text-gray-400 block uppercase">This Month's Recipient</span>
-      <span class="text-xl font-bold text-green-400">Mwansa</span>
+
+    <!-- Interactive Ledger Table Layout -->
+    <div class="bg-[#17102B]/80 border border-purple-500/10 rounded-2xl overflow-hidden mb-6 shadow-inner">
+      <div class="p-4 bg-[#21173D]/40 font-bold text-xs uppercase tracking-wider text-purple-300/70 border-b border-purple-500/10 flex justify-between">
+        <span>Group Members Lineup</span>
+        <span>Round Balance Status</span>
+      </div>
+      
+      <ul class="divide-y divide-purple-500/5">
+        
+        <!-- User 1 Row -->
+        <li class="p-4 flex justify-between items-center hover:bg-purple-500/5 transition-colors group">
+          <div class="flex items-center gap-3">
+            <div class="w-8 h-8 rounded-xl bg-purple-500/10 border border-purple-500/20 text-xs font-black text-purple-300 flex items-center justify-center">01</div>
+            <span class="font-bold text-sm tracking-wide text-slate-200 group-hover:text-white transition-colors">Joshua Chongo</span>
+          </div>
+          <span class="bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 text-[10px] font-black px-3 py-1 rounded-lg tracking-wider uppercase shadow-[0_0_15px_rgba(16,185,129,0.05)]">
+            Paid K500
+          </span>
+        </li>
+
+        <!-- User 2 Row -->
+        <li class="p-4 flex justify-between items-center hover:bg-purple-500/5 transition-colors group bg-purple-500/5">
+          <div class="flex items-center gap-3">
+            <div class="w-8 h-8 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-xs font-black text-emerald-400 flex items-center justify-center">02</div>
+            <div>
+              <span class="font-bold text-sm tracking-wide text-slate-200 block">Mwansa Kachesa</span>
+              <span class="text-[10px] font-semibold text-emerald-400/80 block -mt-0.5">Current Recipient</span>
+            </div>
+          </div>
+          <span class="bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 text-[10px] font-black px-3 py-1 rounded-lg tracking-wider uppercase">
+            Paid K500
+          </span>
+        </li>
+
+        <!-- User 3 Row -->
+        <li class="p-4 flex justify-between items-center hover:bg-purple-500/5 transition-colors group">
+          <div class="flex items-center gap-3">
+            <div class="w-8 h-8 rounded-xl bg-purple-500/10 border border-purple-500/20 text-xs font-black text-purple-300 flex items-center justify-center">03</div>
+            <span class="font-bold text-sm tracking-wide text-slate-200 group-hover:text-white transition-colors">Bwalya Tembo</span>
+          </div>
+          <span class="bg-pink-500/10 text-pink-400 border border-pink-500/20 text-[10px] font-black px-3 py-1 rounded-lg tracking-wider uppercase animate-pulse">
+            Pending
+          </span>
+        </li>
+
+      </ul>
     </div>
+
+    <!-- Communication Hub Action Area -->
+    <div class="bg-gradient-to-r from-[#221644] to-[#2D164C] border border-purple-500/20 rounded-2xl p-5 relative overflow-hidden">
+      <div class="relative z-10">
+        <div class="flex items-center gap-2 mb-1.5">
+          <span class="text-base">📋</span>
+          <h3 class="text-sm font-black uppercase tracking-wider text-purple-200">WhatsApp Broadcast Engine</h3>
+        </div>
+        <p class="text-xs text-purple-300/70 mb-4 leading-relaxed">
+          One-click action generates a perfectly localized, styled text alert ready to copy-paste directly into your group chat to notify remaining players.
+        </p>
+        
+        <!-- Premium Action Button -->
+        <button class="w-full bg-gradient-to-r from-emerald-400 to-teal-500 hover:from-emerald-300 hover:to-teal-400 text-[#0B0813] font-black text-xs uppercase tracking-widest py-3 px-4 rounded-xl transition-all duration-300 shadow-[0_4px_20px_rgba(52,211,153,0.3)] hover:shadow-[0_4px_25px_rgba(52,211,153,0.5)] active:scale-[0.99]">
+          Copy Broadcast System Text
+        </button>
+      </div>
+    </div>
+
   </div>
 
-  <!-- Members Status Table -->
-  <div class="bg-gray-800 rounded-lg overflow-hidden mb-6">
-    <div class="p-4 font-semibold text-sm border-b border-gray-700 bg-gray-850">Member Track List</div>
-    <ul class="divide-y divide-gray-700">
-      <li class="p-4 flex justify-between items-center">
-        <span>1. Joshua</span>
-        <span class="bg-green-900 text-green-300 text-xs px-2 py-1 rounded font-bold">PAID</span>
-      </li>
-      <li class="p-4 flex justify-between items-center">
-        <span>2. Mwansa (Recipient)</span>
-        <span class="bg-green-900 text-green-300 text-xs px-2 py-1 rounded font-bold">PAID</span>
-      </li>
-      <li class="p-4 flex justify-between items-center">
-        <span>3. Bwalya</span>
-        <span class="bg-red-900 text-red-300 text-xs px-2 py-1 rounded font-bold">PENDING</span>
-      </li>
-    </ul>
-  </div>
-
-  <!-- Smart Copy Action Section -->
-  <div class="bg-gray-850 p-4 border border-dashed border-gray-700 rounded-lg">
-    <h3 class="text-sm font-semibold text-yellow-400 mb-2">📋 WhatsApp Broadcast Reminder</h3>
-    <p class="text-xs text-gray-400 mb-4">Click below to copy the automated status update formatted for your WhatsApp group chat.</p>
-    <button class="w-full bg-green-500 hover:bg-green-600 text-gray-950 font-bold py-2 px-4 rounded transition-colors">
-      Copy Broadcast Text
-    </button>
-  </div>
-
-</div>
+</body>
+</html>
